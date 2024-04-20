@@ -1,4 +1,4 @@
-
+import time
 import os
 
 def find_file(path, file) :
@@ -15,6 +15,13 @@ def find_file(path, file) :
 dir = input("search dir: ")
 file = input("target file or dir: ")
 
+
+
+start = time.time()
+
 for i in find_file(dir, file) :
     print(i)
+
+print()
+print(time.time() - start)
 

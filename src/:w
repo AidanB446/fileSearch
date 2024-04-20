@@ -1,6 +1,5 @@
 use walkdir::WalkDir;
 use std::io;
-use std::time::Instant;
 
 pub fn input(text : &String) -> String {
 
@@ -13,17 +12,15 @@ pub fn input(text : &String) -> String {
 
 }
 
-fn main() {
+fn main() -> Result<()>{
    
     let path = input(&String::from("Enter search path: ")); 
     let user_file_inp = input(&String::from("Enter Target name: "));
 
-
-    let now = Instant::now(); 
-
     let mut return_paths : Vec<String> = vec![];
 
-    for entry in WalkDir::new(path.as_str().trim()).into_iter().filter_map(|e| e.ok()) {
+    for entry in WalkDir::new(path.as_str()) {
+        let entry = entry?; 
         let entry = entry.path().display();
    
         if entry.to_string().contains(user_file_inp.as_str().trim()) {
@@ -36,14 +33,6 @@ fn main() {
         println!("{}", i);
     }
 
-
-    println!();
-    println!("{:?}", now.elapsed()); 
-
+    Ok(())
 
 }
-
-
-
-
-
